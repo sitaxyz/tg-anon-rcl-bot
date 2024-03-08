@@ -69,7 +69,7 @@ class Bot:
                         select_group.append(select_user_id)
 
                 if (not self.users[user_id].num_of_group and len(select_group) >= 3) or len(select_group) == self.users[user_id].num_of_group:
-                    print('Группа создана', select_group)
+                    print('group select', select_group)
                     group_chat = GroupChat(len(select_group), select_group)
                     for select_id in select_group:
                         self.users[select_id].dialogue = True
@@ -729,7 +729,7 @@ class Bot:
                         try:
                             await self.bot.send_message(chat_id=chat_id, text=f'Уведомление от админа: {message.text[18:]}')
                         except:
-                            print(f'Пользователь {chat_id} забанил бота')
+                            print(f'user {chat_id} banned the bot')
                             self.users.pop(chat_id)
 
         @self.dp.message_handler(commands=['stop_bot'])
@@ -750,7 +750,7 @@ class Bot:
         @self.dp.message_handler()
         async def no_feedback(message: types.Message):
             await check_verification(message)
-            print('Новое сообщение вне команд')
+            print('New msg outside of the commands')
             await message.answer(text='👾: Я не понимаю вас.')
     
 
